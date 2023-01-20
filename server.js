@@ -6,6 +6,8 @@ const port = 3000;
 
 const bodyParser = require ('body-parser');
 
+const {v4: uuidv4} = require('uuid');//universely unique identifier
+
 app.use(bodyParser.json());//application middleware, looks for incoming data
 
 app.get("/", (req,res) => {
@@ -14,8 +16,16 @@ app.get("/", (req,res) => {
 
 app.post('/login', (req, res) => {
     const loginUser = req.body.userName;
+    const loginPassword = req.body.password;
     console.log('Login username:'+loginUser);
-    res.send('Hello '+loginUser);
+    if (loginUser=="FishSticks" && loginPassword=="Tears4Fears?"){
+        const loginToken = uuidv4();
+        res.send(loginToken);
+        res.send("Hello");
+    } else {
+        res.status(401);//unauthorized
+        res.send('Incorrect password for '+loginUser);
+    }
 });
 
 app.listen(port, () => {
