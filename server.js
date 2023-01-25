@@ -6,6 +6,10 @@ const port = 3000;
 
 const bodyParser = require ('body-parser');
 
+const redis = require ('redis');
+
+const redisClient = redis.createClient({url:"redis://127.0.0.1:6379"});
+
 const {v4: uuidv4} = require('uuid');//universely unique identifier
 
 app.use(bodyParser.json());//application middleware, looks for incoming data
@@ -29,5 +33,6 @@ app.post('/login', (req, res) => {
 });
 
 app.listen(port, () => {
+    redisClient.connect();
     console.log("listening");
 });
