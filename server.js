@@ -16,8 +16,11 @@ app.use(bodyParser.json());//application middleware, looks for incoming data
 
 app.use(express.static("public")); //tells frontend where to go (public folder)
 
-app.get("/", (req,res) => {
+app.get("/validate/:loginToken", async(req,res) => {
     res.send("Hello Vance");
+    const loginToken =req.params.loginToken;
+    const loginUser = await redisClient.hGet('TokenMap',loginToken,loginToken); 
+    res.send(loginUser);
 });
 
 app.post('/login', async(req, res) => {

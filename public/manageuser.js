@@ -11,10 +11,6 @@ function setusername(){
 
 function setuserpassword(){
     password = $("#password").val();
-    var valid=passwordRegEx.exec(password);
-    if (!valid){
-        alert('Must be 6 digits, upper, lower, number, and symbol');
-    }
 }
 
 function setverifypassword(){
