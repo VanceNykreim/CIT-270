@@ -15,10 +15,17 @@ const {v4: uuidv4} = require('uuid');//universely unique identifier
 app.use(bodyParser.json());//application middleware, looks for incoming data
 
 app.use(express.static("public")); //tells frontend where to go (public folder)
+const cookieParser = require("cookie-parser");
+app.use(cookieParser());
 
-app.get("/validate/:loginToken", async(req,res) => {
-    const loginToken =req.params.loginToken;
-    const loginUser = await redisClient.hGet('TokenMap',loginToken,loginToken); 
+app.get("/", (req, res) => {
+    res.send("Hello Gary!");
+});
+
+app.get("/validate", async(req,res) => {
+    const loginToken =req.cookies.stediCookie;
+    console.log("loginToken", loginToken);
+    const loginUser = await redisClient.hGet('TokenMap',loginToken); 
     res.send(loginUser);
 });
 
