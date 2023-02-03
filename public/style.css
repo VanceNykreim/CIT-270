@@ -73,7 +73,7 @@ h1 {
 }
 mark {
   background: #ff0;
-  color: #000;
+  color: rgb(184, 44, 44);
 }
 small {
   font-size: 80%;
