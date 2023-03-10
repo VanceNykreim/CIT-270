@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cit270vanceservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cit270vanceservice
+  template:
+    metadata:
+      - name: cit270vanceservice
+      labels:
+        app: cit270vanceservice
+    spec:
+      containers:
+        - name: cit270vanceservice
+        image: cit-270-kubernetes/vance-api
+        volumeMounts:
+          -name: ssl
+            mountPath: "/etc/letsencrypt/live/SSL"
+          command: ["npm"]
+          args: ["run", "start"]
+          resources:
+            requests:
+              cpu: 0.125
+              memory: 500Mi
+            limits:
+              cpu: 0.125
+              memory: 600Mi
+          imagePullPolicy: Always
+        volumes:
+          - name: ssl
+          secret:
+            secretName: vancecerts
+            

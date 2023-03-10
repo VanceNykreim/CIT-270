@@ -4,3 +4,4 @@ COPY package*.json /usr/src/app/node/
 RUN npm install
 COPY . .
 EXPOSE 443
+CMD ["npm", "run", "start"] 
