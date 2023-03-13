@@ -80,12 +80,14 @@ app.post('/login', async(req, res) => {
 // });
 
 https.createServer({
-    key: fs.readFileSync('./privkey.pem'),
-    cert: fs.readFileSync('./cert.pem'),
-    ca: fs.readFileSync('./fullchain.pem')
+    key: fs.readFileSync('/etc/letsencrypt/live/vancenykreim.cit270.com/privkey.pem'),
+    cert: fs.readFileSync('/etc/letsencrypt/live/vancenykreim.cit270.com/cert.pem'),
+    ca: fs.readFileSync('/etc/letsencrypt/live/vancenykreim.cit270.com/fullchain.pem')
 }, 
 app
 ).listen(port, ()=>{
     redisClient.connect();
     console.log('listening on port: '+port);
 });
+
+// /etc/letsencrypt/live/vancenykreim.cit270.com/
