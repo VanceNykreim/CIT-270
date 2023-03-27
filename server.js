@@ -2,13 +2,13 @@ const express = require ("express");
 
 const app = express();
 
-const port = 443;
+const port = 3000;
 
 const bodyParser = require ('body-parser');
 
 const redis = require ('redis');
 
-const redisClient = redis.createClient({url:"redis://default:notgary@redis-stedi-vance:6379"});
+const redisClient = redis.createClient({url:"redis://default:notgary@10.12.9.19:6379"});
 
 const {v4: uuidv4} = require('uuid');//universely unique identifier
 
@@ -79,13 +79,12 @@ app.post('/login', async(req, res) => {
 //     console.log("listening");
 // });
 
-https.createServer({
-    key: fs.readFileSync('/etc/letsencrypt/live/vancenykreim.cit270.com/privkey.pem'),
-    cert: fs.readFileSync('/etc/letsencrypt/live/vancenykreim.cit270.com/cert.pem'),
-    ca: fs.readFileSync('/etc/letsencrypt/live/vancenykreim.cit270.com/fullchain.pem')
-}, 
-app
-).listen(port, ()=>{
+// https.createServer({
+//     key: fs.readFileSync('/etc/letsencrypt/live/vancenykreim.cit270.com/privkey.pem'),
+//     cert: fs.readFileSync('/etc/letsencrypt/live/vancenykreim.cit270.com/cert.pem'),
+//     ca: fs.readFileSync('/etc/letsencrypt/live/vancenykreim.cit270.com/fullchain.pem')
+// }, 
+app.listen(port, ()=>{
     redisClient.connect();
     console.log('listening on port: '+port);
 });

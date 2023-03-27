@@ -33,4 +33,15 @@ spec:
       - name: ssl
         secret:
           secretName: vancecerts
-            
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cit270vanceservice-loadbalancer
+spec:
+  selector:
+    app: cit270vanceservice
+  type: LoadBalancer
+  ports:
+  - port: 443
+    targetPort: 443
