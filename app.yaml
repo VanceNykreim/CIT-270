@@ -53,7 +53,7 @@ metadata:
 spec:
   selector:
     app: cit270vanceservice
-  type: nodeport
+  type: NodePort
   ports:
     - port: 80
       targetPort: 3000
@@ -74,7 +74,7 @@ metadata:
   # use this command to find the address name: gcloud compute addresses list
     kubernetes.io/ingress.global-static-ip-name: cit270vance
   # needs to match the name of the ManagedCertificate (line 75)
-  networking.gke.io/managed-certificates: stedi-vancenykreim-certificate
+    networking.gke.io/managed-certificates: stedi-vancenykreim-certificate
 spec:
   rules:
   - http:
